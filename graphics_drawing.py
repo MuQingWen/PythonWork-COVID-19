@@ -3,7 +3,7 @@ from pyecharts import options
 from data_process import *
 
 
-#绘制中国疫情数据图
+# 绘制中国疫情数据图
 def render_china_map_chart(t_date):
     province_data = deal_china_data(t_date)
     map_country = Map()
@@ -21,7 +21,10 @@ def render_china_map_chart(t_date):
                                                                           "color": "#F39E86"},
                                                                          {"min": 1, "max": 9, "label": '1-9人',
                                                                           "color": "#FDEBD0"}]))
+    # 将数据导入地图内，地图模式选择china
     map_country.add("确诊", list(province_data), maptype="china")
+    # 生成html文件
     map_country.render("country.html")
 
-render_china_map_chart('05-01-2021')
+
+render_china_map_chart('01-01-2021')
