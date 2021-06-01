@@ -1,4 +1,5 @@
 from pyecharts.charts import Map
+from pyecharts.charts import Line
 from pyecharts import options
 from data_process import *
 
@@ -27,4 +28,23 @@ def render_china_map_chart(t_date):
     map_country.render("country.html")
 
 
-render_china_map_chart('01-01-2021')
+def render_dayly_chart(begin_date, end_date, t_country):
+    date = []
+    confirmed = []
+    deaths = []
+    recovered = []
+    data = get_date_period_data(begin_date, end_date, t_country)
+    for i in data:
+        date.append(i[1])
+        confirmed.append(i[2])
+        deaths.append(i[3])
+        recovered.append(i[4])
+    line = Line()
+    line.add_xaxis(date)
+    line.add_yaxis("确诊人数", confirmed, is_smooth = True)
+    line.add_yaxis("死亡人数", deaths, is_smooth = True)
+    line.add_yaxis("恢复人数", recovered, is_smooth = True)
+    line.set_global_opts(title_opts=options.TitleOpts(title = "{}疫情数据统计图".format(t_country)))
+    line.set_series_opts(label_opts=options.LabelOpts(is_show=False))
+    line.render("line.html")
+
