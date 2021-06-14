@@ -26,6 +26,7 @@ class Ui_country_ui(object):
         self.dateEdit_2 = QtWidgets.QDateEdit(self.centralwidget)
         self.dateEdit_2.setGeometry(QtCore.QRect(160, 10, 110, 22))
         self.dateEdit_2.setObjectName("dateEdit_2")
+
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox.setGeometry(QtCore.QRect(290, 10, 69, 22))
         self.comboBox.setObjectName("comboBox")
@@ -35,14 +36,21 @@ class Ui_country_ui(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+
+        self.statistical_methods = QtWidgets.QComboBox(self.centralwidget)
+        self.statistical_methods.setGeometry(QtCore.QRect(380, 10, 75, 22))
+        self.statistical_methods.setObjectName("statistical_methods")
+        self.statistical_methods.addItem("")
+        self.statistical_methods.addItem("")
+
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(380, 10, 75, 23))
+        self.pushButton.setGeometry(QtCore.QRect(470, 10, 75, 23))
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(470, 10, 75, 23))
+        self.pushButton_2.setGeometry(QtCore.QRect(560, 10, 75, 23))
         self.pushButton_2.setObjectName("pushButton_2")
         self.refreshlebal = QtWidgets.QLabel(self.centralwidget)
-        self.refreshlebal.setGeometry((QtCore.QRect(600,10,300,23)))
+        self.refreshlebal.setGeometry((QtCore.QRect(690,10,300,23)))
         self.browser = QWebEngineView(self.centralwidget)
         self.browser.setGeometry(QtCore.QRect(40, 40, 900, 500))
         self.browser.load(QUrl('http://localhost:63342/main.py/line.html?_ijt=6rfathn5e84vqqcf2r8etbp83q'))
@@ -65,6 +73,9 @@ class Ui_country_ui(object):
         self.comboBox.setItemText(3, _translate("country_ui", "France"))
         self.comboBox.setItemText(4, _translate("country_ui", "Russia"))
         self.comboBox.setItemText(5, _translate("country_ui", "Brazil"))
+
+        self.statistical_methods.setItemText(0, _translate("country_ui", "普通坐标"))
+        self.statistical_methods.setItemText(1, _translate("country_ui", "对数坐标"))
         self.pushButton.setText(_translate("country_ui", "修改数据"))
         self.pushButton_2.setText(_translate("country_ui", "刷新"))
         self.refreshlebal.setText(_translate("china_ui", "请等候地图加载"))
@@ -73,9 +84,11 @@ class Ui_country_ui(object):
         first_time = self.dateEdit.dateTime()
         end_time = self.dateEdit_2.dateTime()
         country = self.comboBox.currentText()
+        methods = self.statistical_methods.currentText()
+
         f_time = first_time.toString("MM-dd-yyyy")
         e_time = end_time.toString("MM-dd-yyyy")
-        render_dayly_chart(str(f_time), str(e_time), str(country))
+        render_dayly_chart(str(f_time), str(e_time), str(country), str(methods))
         self.refreshlebal.setText("加载完毕,请刷新")
 
 
